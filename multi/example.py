@@ -1,24 +1,29 @@
-#!/usr/bin/python
-# https://www.tutorialspoint.com/python/python_multithreading.htm
+# threading_simpleargs.py
+import threading
 
-import thread
-import time
+def makestr(n):
+    return "{0:b}".format(n)
 
-# Function definitions
-def print_time(name, delay):
-    count = 0
-    while count < 5:
-        time.sleep(delay)
-        count += 1
-        print(str(name) + ": " + str(time.ctime(time.time())))
+def padstr(s, size):
+    out = s
+    while len(out) < size:
+        out = "0" + out
+    return out
+
+def worker(num, start, end, out):
+    """thread worker function"""
+    print('Worker: %s' % num)
+    for i in range(start, end):
+        s = padstr(makestr(i), 32)
+        out.append(s)
+    print('Finished: %s' % num)
 
 
-try:
-    thread.start_new_thread(print_time, ("t1", 2, ))
-    thread.start_new_thread(print_time, ("t2", 4, ))
+threads = []
+record = []
+for i in range(5):
+    t = threading.Thread(target=worker, args=(i, 100*i, 100*(i+1), record,))
+    threads.append(t)
+    t.start()
 
-except:
-    print("ERROR: Unable to start thread")
-
-while True:
-    pass
+print(record)
