@@ -22,16 +22,19 @@ def pad_string(instring, size):
     return out
 
 if __name__ == "__main__":
-    # Set params for generation
     # int values of binary strings to start/end from
     start = 0
-    end = 4294967296
+
     # bit length to pad to
     bit_len = 32
+    end = 2 ** bit_len 
+
+    # int amount to skip by 
+    skip = 512
+
 
     # Build set of bitstrings
-    # longString = make_strings(start, end, skip=64)
-    longString = make_strings(start, end, skip=512)
+    longString = make_strings(start, end, skip=skip)
     rows = longString.split('\n')
 
     strings = []
@@ -42,7 +45,6 @@ if __name__ == "__main__":
     for row in tqdm(rows):
         padded = pad_string(row, bit_len)
         b = BitArray(bin=padded)
-        # print(padded, int_from_bits(row), b.float)
         strings.append(padded)
         ints.append(int_from_bits(row))
         floats.append(b.float)

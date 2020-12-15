@@ -34,5 +34,6 @@ print(jumps)
 print(len(jumps))
 
 plt.plot(arr[1:], diffs)
+plt.ylabel('Distance from previous x float value')
+plt.xlabel('Value of x as float')
 plt.show()
-
