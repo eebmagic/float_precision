@@ -29,8 +29,10 @@ diffs = np.diff(real)
 print(f'Min: {np.min(arr)}')
 print(f'Max: {np.max(arr)}')
 
-plt.plot(arr[1:], diffs)
-# plt.show()
 jumps = sorted(list(set(diffs)))
 print(jumps)
 print(len(jumps))
+
+plt.plot(arr[1:], diffs)
+plt.show()
+

@@ -23,8 +23,10 @@ def pad_string(instring, size):
 
 if __name__ == "__main__":
     # Set params for generation
+    # int values of binary strings to start/end from
     start = 0
     end = 4294967296
+    # bit length to pad to
     bit_len = 32
 
     # Build set of bitstrings
